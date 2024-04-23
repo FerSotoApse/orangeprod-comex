@@ -18,22 +18,22 @@ def main():
 
     # dataset comex de naranjas
     with st.expander(label = "DataFrame - Flujo comercial de naranjas españolas - 2002 a 2023", expanded = False):
-        df_comex = pd.read_csv(filepath_or_buffer = "/sources/comex_2002_2024.csv", encoding="latin-1")
+        df_comex = pd.read_csv(filepath_or_buffer = "sources/comex_2002_2024.csv", encoding="latin-1")
     #    st.dataframe(df_comex)
     # dataset comex y prod
     with st.expander(label = "DataFrame - Producción y comercio de naranjas españolas - 2002 a 2022", expanded = True):
-        df_cmx_prd = pd.read_csv(filepath_or_buffer = "/sources/comex_prod_2002_2022.csv", encoding="latin-1")
+        df_cmx_prd = pd.read_csv(filepath_or_buffer = "sources/comex_prod_2002_2022.csv", encoding="latin-1")
     #     st.dataframe(df_cmx_prd)
     # dataset produccion df_prod = pd.read_csv(f"{ruta_recursos}produccion_naranjas_2002_2022.csv")
     with st.expander(label = "DataFrame - Producción de naranjas españolas - 2002 a 2022", expanded = False):
-        df_prod = pd.read_csv(filepath_or_buffer = "/sources/produccion_naranjas_2002_2022.csv")
+        df_prod = pd.read_csv(filepath_or_buffer = "sources/produccion_naranjas_2002_2022.csv")
      #   st.dataframe(df_prod)
     # carta gantt referencial df_recol = pd.read_csv(f"{ruta_recursos}periodos_recoleccion_naranjas.csv", encoding="latin-1")
     with st.expander(label = "Carta Gantt - Referencia recolección de naranjas", expanded = False):
-        df_recol = pd.read_csv(filepath_or_buffer = "/sources/periodos_recoleccion_naranjas.csv", encoding="latin-1")
+        df_recol = pd.read_csv(filepath_or_buffer = "sources/periodos_recoleccion_naranjas.csv", encoding="latin-1")
     #   st.dataframe(df_recol)
     with st.expander(label = "Folium - Geolocalización de zonas con naranjas", expanded = False):
-        df = pd.read_csv(filepath_or_buffer = "/sources/Map.csv")
+        df = pd.read_csv(filepath_or_buffer = "sources/Map.csv")
     #   st.dataframe(df)
 
 # INICIO SIDEBAR -------------------------------------------------------------------------------------------------------

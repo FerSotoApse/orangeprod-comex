@@ -36,9 +36,9 @@ def ml_app():
     #st.write(df_europe_grouped)
 
     
-    model_path = "/sources/rnn_model.keras"  # Path to your saved model
+    model_path = "sources/rnn_model.keras"  # Path to your saved model
     model = load_model(model_path)
-    with open("/sources/scaler.pkl", "br") as file:
+    with open("sources/scaler.pkl", "br") as file:
         sc = pickle.load(file)
 
     meses = st.sidebar.number_input(label = "Meses de Predicción, introduce el número", min_value = 1, max_value = 12, value = 1)

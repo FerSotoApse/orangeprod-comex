@@ -7,7 +7,7 @@ import plotly.express as px
 def eda_comercio():
 
     with st.expander(label = "DataFrame - Flujo comercial de naranjas españolas - 2002 a 2023", expanded = False):
-        df_comex = pd.read_csv(filepath_or_buffer = "/sources/comex_2002_2024.csv", encoding="latin-1")
+        df_comex = pd.read_csv(filepath_or_buffer = "sources/comex_2002_2024.csv", encoding="latin-1")
 
     # estructura de querys en sidebar ---------------------
     vista = st.sidebar.radio(label = "Vistas de flujo comercial",

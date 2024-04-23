@@ -9,11 +9,11 @@ from streamlit_folium import st_folium
 def eda_produccion():
 
     with st.expander(label = "DataFrame - Producción de naranjas españolas - 2002 a 2022", expanded = False):
-        df_prod = pd.read_csv(filepath_or_buffer = "/sources/produccion_naranjas_2002_2022.csv")
+        df_prod = pd.read_csv(filepath_or_buffer = "sources/produccion_naranjas_2002_2022.csv")
         df_prod["Eficiencia"]= (df_prod["Producción Total"]/df_prod["Superficie Plantación"]).round(2)
      #   st.dataframe(df_prod)
     with st.expander(label = "Mapa de regiones productivas de naranjas", expanded = False):
-        df_map = pd.read_csv(filepath_or_buffer = "/sources/Map.csv")
+        df_map = pd.read_csv(filepath_or_buffer = "sources/Map.csv")
         #st.dataframe(df_map)
 
     # estructura sidebar -------------------------------------------
@@ -107,7 +107,7 @@ def eda_produccion():
             # Mapa de Folium centrada en España
             m = folium.Map(location=[40.4168, 0.0], zoom_start=5.5)
 
-            icon_image = "/sources/orange.png"
+            icon_image = "sources/orange.png"
             for index, row in year_data.iterrows():
                 display_info = f"Año: {year_query}, Provincia: {row['Provincias']}, Producción: {row['Producción Total']} toneladas"
                 coords = (row["Latitude"], row["Longitude"])
