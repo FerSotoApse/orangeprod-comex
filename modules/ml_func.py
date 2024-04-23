@@ -8,7 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 @st.cache_data
 def dataset():
     # Load CSV data
-    df = pd.read_csv("/home/bosse/Escritorio/hab_onedrive/proyecto3/sources/export_transport.csv")
+    df = pd.read_csv("sources/export_transport.csv")
     
     # Filtramos los datos
     df = df[(df["PartnerISO"] != "W00") & (df["Partner2ISO"] != "W00") & (df["CustomsDesc"] != "TOTAL CPC") & (df["MotDesc"] != "TOTAL MOT")]
@@ -192,7 +192,7 @@ def download_file(df):
 
 def loss_model():
     # Load CSV data
-    df_loss = pd.read_csv("/home/bosse/Escritorio/hab_onedrive/proyecto3/sources/loss_data.csv")
+    df_loss = pd.read_csv("sources/loss_data.csv")
     
     # MSE 
     mse_loss = ((df_loss['loss'].iloc[-1] - df_loss['loss'].mean())**2).mean()
