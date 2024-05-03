@@ -10,7 +10,6 @@ from eda_comercio import eda_comercio
 from ml_app import ml_app
 
 st.set_page_config(**PAGE_CONFIG)
-# setear un PAGE_CONFIG.py para tener formato ancho
 
 def main():
 
@@ -42,20 +41,6 @@ def main():
     st.sidebar.markdown("### Vistas de exploración de datos y de proyecciones.")
     seccion = ["Presentación", "Producción", "Flujo comercial", "Proyección de exportaciones"]
     choose_section = st.sidebar.selectbox("Sección", options = seccion)
-
-
-    # st.sidebar.text(f"{year_query}-{month_query}")
-
-    # season = st.sidebar.selectbox(label   = "Select season:",
-    #                               options = df["season"].unique(),
-    #                               index   = 0)
-    # 
-    # ep_number = st.sidebar.selectbox(label   = "Select episode:",
-    #                                  options = df[df["season"] == season]["episode"].values,
-    #                                  index   = 0)
-# 
-    # df_sidebar = df[df["episode"] == ep_number][["script"]]
-    # df_sidebar = df_sidebar.explode(column = "script")
 
 # FIN SIDEBAR -------------------------------------------------------------------------------------------------
 
@@ -131,8 +116,6 @@ def main():
         tab_pres3.dataframe(df_prod)
         tab_pres3.write('Creado por Alissa Zogorodnykh, Fernanda Soto y Jose David Mendez.')
 
-    # st.header("Periodos de recolección temprana y tardía de naranjas")
-    # st.header("Producción y comercio anual de naranjas españolas, entre 2002 y 2022")
 # CIERRE DE BLOQUE --------------------------------------------------------------------------------------------
     elif choose_section == "Producción":
         eda_produccion()
@@ -143,7 +126,6 @@ def main():
     elif choose_section == "Proyección de exportaciones":
         ml_app()
 
-# hasta aqui!!!!-----------------------------------------------------------------
     pass
 if __name__ == "__main__":
     main()
