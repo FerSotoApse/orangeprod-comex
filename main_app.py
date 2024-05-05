@@ -58,6 +58,7 @@ def main():
                                 x_start= 'Inicio',
                                 x_end = 'Fin',
                                 y = 'Variedad',
+                                hover_name= 'Variedad', # modificacion 1 (solo esta linea)
                                 color='Grupo',
                                 color_discrete_sequence=["NavajoWhite","OrangeRed", "DarkOrange"],
                                 template="plotly_dark",
@@ -108,13 +109,44 @@ def main():
         tab_pres2.write("La capacidad productiva interna permite un gran abastecimiento a lo largo del año, incluyendo los meses sin recolección, necesitando importar sólo para cubrir estos pocos meses fuera de temporada")
 
 
-        # TAB 3: dataframes
+        # TAB 3: dataframes MODIFICACION 2 (bloque completo de tab 3)
         tab_pres3.write("Los datos fueron recopilados de COMTRADE de la Unión Europea, VisualCrossing para datos climáticos y los datos de producción del Ministerio de Agricultura, Pesca y Alimentación de España. Las fechas de recolección de la carta Gantt fueron obtenidas del Ayuntamiento Palma del Rio con apoyo de agricultores y comercio (Agrológica, Naranjas Bou, Vivero Guanino).")
-        tab_pres3.markdown(body = "fuente de comercio y transporte de naranjas (COMTRADE)") # , unsafe_allow_html = True
-        tab_pres3.dataframe(df_comex)
-        tab_pres3.markdown(body = "fuente de produccion de naranjas") # , unsafe_allow_html = True
-        tab_pres3.dataframe(df_prod)
-        tab_pres3.write('Creado por Alissa Zogorodnykh, Fernanda Soto y Jose David Mendez.')
+        table_col1, table_col2 = tab_pres3.columns([1,1])
+        with table_col1:
+            with st.container():
+                st.subheader(body = "Comercio y Transporte de naranjas (COMTRADE)") # , unsafe_allow_html = True
+                st.dataframe(df_comex)
+                st.markdown(body = "Fuente flujo comercial: COMTRADE (https://comtradeplus.un.org/)")
+                st.markdown(body = "Fuente principal carta Gantt: Ayuntamiento Palma del Río (https://palmadelrio.es/?s=naranjas&et_pb_searchform_submit=et_search_proccess&et_pb_include_posts=yes&et_pb_include_pages=yes)")
+        with table_col2:
+            with st.container():
+                st.subheader(body = "Producción de naranjas y clima por provincia") # , unsafe_allow_html = True
+                st.dataframe(df_prod)
+                st.markdown(body = "Fuente clima: Visualcrossing (https://www.visualcrossing.com/weather-data)")
+                st.markdown(body = "Fuente producción: Ministerio (https://comtradeplus.un.org/)")
+        
+        # creditos de creacion y logo HAB
+        cred_col1, cred_col2, cred_col3, cred_col4 = tab_pres3.columns([1,1,1,1])
+        with cred_col1: # imagen HAB desde web
+            st.image("https://assets-global.website-files.com/5f3108520188e7588ef687b1/620e82ff8680cd26532fff29_Logotipo%20HACK%20A%20BOSS_white%20100%20px.svg",
+                     width=182)
+        with cred_col2:
+            with st.container(border=True):
+                st.subheader('Alissa Zogorodnykh')
+                st.write("linkedIn")
+                st.write("GitHub")
+        with cred_col3:
+            with st.container(border=True):
+                st.subheader("Fernanda Soto Apse")
+                st.write("linkedIn")
+                st.write("GitHub")
+        with cred_col4:
+            with st.container(border=True):
+                st.subheader("Jose David Mendez")
+                st.write("linkedIn")
+                st.write("GitHub")
+
+
 
 # CIERRE DE BLOQUE --------------------------------------------------------------------------------------------
     elif choose_section == "Producción":
@@ -126,6 +158,7 @@ def main():
     elif choose_section == "Proyección de exportaciones":
         ml_app()
 
+# hasta aqui!!!!-----------------------------------------------------------------
     pass
 if __name__ == "__main__":
     main()

@@ -210,7 +210,7 @@ def loss_model():
         yaxis_title='Loss'
     )
 
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 #    # Invert scaled MSE values to original scale
 #    scaler = MinMaxScaler()  # Initialize MinMaxScaler

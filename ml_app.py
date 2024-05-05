@@ -41,8 +41,10 @@ def ml_app():
     with open("sources/scaler.pkl", "br") as file:
         sc = pickle.load(file)
 
+    # sidebar
     meses = st.sidebar.number_input(label = "Meses de Predicción, introduce el número", min_value = 1, max_value = 12, value = 1)
 
+    # inputs para ejecución del modelo
     inputs = np.array(df_europe_grouped.iloc[-10:, -1])
     inputs = inputs.reshape(-1,1)
     inputs = sc.transform(inputs)
@@ -52,53 +54,56 @@ def ml_app():
     df_real = df_europe_grouped[(df_europe_grouped["Year"] >= 2021) & ((df_europe_grouped["Month"] >= 11) | (df_europe_grouped["Year"] == 2022) | ((df_europe_grouped["Year"] == 2023) & (df_europe_grouped["Month"] <= 9)))]
     real_values = df_real.iloc[:, -1].values
     
-    predicted_values = []
+    m_col1, m_col2 = st.columns([1,2])
+    with m_col1:
+        predicted_values = []
 
-    for i in range(meses):
-        pred = model.predict(inputs.reshape(1, -1, 1))
-        pred = sc.inverse_transform(pred)[0, 0]
-        st.write(f"Predicción para el mes {i+1}: {pred} toneladas")
-        predicted_values.append(pred)
-        inputs = np.append(inputs[1:], pred)
-        inputs = inputs.reshape(-1, 1)
+        for i in range(meses):
+            pred = model.predict(inputs.reshape(1, -1, 1))
+            pred = sc.inverse_transform(pred)[0, 0]
+            st.write(f"Predicción para el mes {i+1}: {pred} toneladas")
+            predicted_values.append(pred)
+            inputs = np.append(inputs[1:], pred)
+            inputs = inputs.reshape(-1, 1)
 
-    months_labels = ["Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "Jun", "Jul", "Ago", "Sep"]
-    
-    # crea una figura plotly
-    fig = go.Figure()
+    with m_col2:
+        with st.container():
+            months_labels = ["Oct", "Nov", "Dic", "Ene", "Feb", "Mar", "Abr", "Jun", "Jul", "Ago", "Sep"]
+            # crea una figura plotly para visualizar la predicción
+            fig = go.Figure()
 
-    # agrega trazado para valores de predicción
-    fig.add_trace(go.Scatter(x=months_labels, y=predicted_values, mode='lines', name='Predicción de Exportación', line=dict(color='orange')))
+            # agrega trazado para valores de predicción
+            fig.add_trace(go.Scatter(x=months_labels, y=predicted_values, mode='lines', name='Predicción de Exportación', line=dict(color='orange')))
 
-    # Actualiza layout del gráfico
-    fig.update_layout(
-        title='Exportaciónes de Naranjas',
-        xaxis_title='Meses',
-        yaxis_title='Toneladas',
-        legend=dict(x=0.7, y=1)  # ajusta posición de leyenda
-    )
+            # Actualiza layout del gráfico
+            fig.update_layout(
+                title='Exportaciónes de Naranjas',
+                xaxis_title='Meses',
+                yaxis_title='Toneladas',
+                legend=dict(x=0.7, y=1)  # ajusta posición de leyenda
+            )
+            # Muestra el gráfico en streamlit
+            st.plotly_chart(fig, use_container_width=True)
+            # usa los mismos valores reales para las predicciones
+            real_values = real_values[:len(predicted_values)]
+            # Calculate R2 score
+            st.write(f"Coeficiente de determinación (R2): 0.822")
 
-    # Muestra el gráfico en streamlit
-    st.plotly_chart(fig)
-
-    # usa los mismos valores reales para las predicciones
-    real_values = real_values[:len(predicted_values)]
-    # Calculate R2 score
-    st.write(f"Coeficiente de determinación (R2): 0.822")
-
-    mse_loss, mse_val_loss = loss_model()
-
-    # revierte el escalado de los valores de MSE a escala original
-    scaler = MinMaxScaler(feature_range=(0, 1))  
-    scaler.fit([[0], [1]])  
-    mse_loss_original_scale = scaler.inverse_transform([[mse_loss]])[0][0]
-    mse_val_loss_original_scale = scaler.inverse_transform([[mse_val_loss]])[0][0]
-
-    # MSE
-    st.write(f"MSE from last value of loss: {mse_loss_original_scale}")
-    st.write(f"MSE from last value of val_loss: {mse_val_loss_original_scale}")
-
-
+    m_col3, m_col4 = st.columns([1,2])
+    with m_col4:
+        with st.container():
+            mse_loss, mse_val_loss = loss_model()
+            # revierte el escalado de los valores de MSE a escala original
+            scaler = MinMaxScaler(feature_range=(0, 1))  
+            scaler.fit([[0], [1]])  
+            mse_loss_original_scale = scaler.inverse_transform([[mse_loss]])[0][0]
+            mse_val_loss_original_scale = scaler.inverse_transform([[mse_val_loss]])[0][0]
+    with m_col3:
+        with st.container():
+            st.subheader('Métricas y visualización de margen de error')
+            # MSE
+            st.write(f"MSE from last value of loss: {mse_loss_original_scale}")
+            st.write(f"MSE from last value of val_loss: {mse_val_loss_original_scale}")
 
     
 if __name__ == '__ml_app__':
