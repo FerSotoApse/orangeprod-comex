@@ -132,19 +132,19 @@ def main():
                      width=182)
         with cred_col2:
             with st.container(border=True):
-                st.subheader('Alissa Zogorodnykh')
-                st.write("linkedIn")
-                st.write("GitHub")
+                st.subheader('Alissa Zagorodnykh')
+                st.write("linkedIn\t https://www.linkedin.com/in/alissa-zagorodnykh-45a0b111b")
+                st.write("GitHub\t https://github.com/alissaZN")
         with cred_col3:
             with st.container(border=True):
                 st.subheader("Fernanda Soto Apse")
-                st.write("linkedIn")
-                st.write("GitHub")
+                st.write("linkedIn\t https://www.linkedin.com/in/fersotoapse")
+                st.write("GitHub\t https://github.com/FerSotoApse")
         with cred_col4:
             with st.container(border=True):
                 st.subheader("Jose David Mendez")
-                st.write("linkedIn")
-                st.write("GitHub")
+                st.write("linkedIn\t https://www.linkedin.com/in/jose-david-mendez-marquez-3aab002b5")
+                st.write("")
 
 
 
