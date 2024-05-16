@@ -123,7 +123,7 @@ def main():
                 st.subheader(body = "Producción de naranjas y clima por provincia") # , unsafe_allow_html = True
                 st.dataframe(df_prod)
                 st.markdown(body = "Fuente clima: Visualcrossing (https://www.visualcrossing.com/weather-data)")
-                st.markdown(body = "Fuente producción: Ministerio (https://comtradeplus.un.org/)")
+                st.markdown(body = "Fuente producción: Ministerio (https://www.mapa.gob.es/es/estadistica/temas/estadisticas-agrarias/agricultura/superficies-producciones-anuales-cultivos/default.aspx)")
         
         # creditos de creacion y logo HAB
         cred_col1, cred_col2, cred_col3, cred_col4 = tab_pres3.columns([1,1,1,1])
