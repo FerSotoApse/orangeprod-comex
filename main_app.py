@@ -13,7 +13,7 @@ st.set_page_config(**PAGE_CONFIG)
 
 def main():
 
-    st.title('Naranjas en España:flag-es::tangerine:')
+    st.title('Naranjas en España :flag-es::tangerine:')
 
     # dataset comex de naranjas
     with st.expander(label = "DataFrame - Flujo comercial de naranjas españolas - 2002 a 2023", expanded = False):
