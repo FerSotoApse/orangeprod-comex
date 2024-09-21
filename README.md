@@ -1,6 +1,6 @@
 # 🍊 Producción y comercio internacional de naranjas españolas 🍊 #
 
-[Visita el protecto!](https://orangeapp-comex.streamlit.app)
+[¡Visita el proyecto!](https://orangeapp-comex.streamlit.app)
 
 ## Resumen ##
 Dentro de los paises productores y exportadores de naranjas, España se encuentra dentro de los 10 más importantes, gracias al clima
